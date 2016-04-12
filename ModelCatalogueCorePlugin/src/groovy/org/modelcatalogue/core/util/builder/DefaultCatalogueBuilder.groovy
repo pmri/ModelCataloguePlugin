@@ -228,7 +228,7 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
         }
 
         context.withContextElement(DataType) { CatalogueElementProxy outerDataType, Closure relConf ->
-            if (outerDataType.name == dataType.name) {
+            if (outerDataType.name.trim().equalsIgnoreCase(dataType.name.trim())) {
                 dataType.merge(outerDataType)
             } else {
                 if(outerDataType.domain!=dataType.domain) {

@@ -1,7 +1,3 @@
-measurementUnit name: "celsius", description: "degrees celsius", symbol: "°C"
-measurementUnit name: "fahrenheit", description: "degrees fahrenheit", symbol: "°F"
-measurementUnit name: "newtons", description: "measurement of force", symbol: "N"
-
 dataModel name: 'SI', {
     // the units are already there but unclassified
     globalSearchFor measurementUnit
@@ -123,17 +119,266 @@ dataModel name: 'SI', {
 
 }
 
+dataModel name: 'SI Derived Units', {
+
+// the units are already there but unclassified
+globalSearchFor measurementUnit
+description 'The International System of Units (SI) Derived Units'
+
+rel 'import' to "SI", "SI"
 
 // other units, unclassified
-measurementUnit name: 'area', description: 'square meter', symbol: 'm2'
-measurementUnit name: 'volume', description: 'cubic meter', symbol: 'm3'
-measurementUnit name: 'speed, velocity', description: 'meter per second', symbol: 'm/s'
-measurementUnit name: 'acceleration', description: 'meter per second squared  ', symbol: 'm/s2'
-measurementUnit name: 'wave number', description: 'reciprocal meter', symbol: 'm-1'
-measurementUnit name: 'mass density', description: 'kilogram per cubic meter', symbol: 'kg/m3'
-measurementUnit name: 'specific volume', description: 'cubic meter per kilogram', symbol: 'm3/kg'
-measurementUnit name: 'current density', description: 'ampere per square meter', symbol: 'A/m2'
-measurementUnit name: 'magnetic field strength  ', description: 'ampere per meter', symbol: 'A/m'
-measurementUnit name: 'amount-of-substance concentration', description: 'mole per cubic meter', symbol: 'mol/m3'
-measurementUnit name: 'luminance', description: 'candela per square meter', symbol: 'cd/m2'
-measurementUnit name: 'mass fraction', description: 'kilogram per kilogram', symbol: 'kg/kg = 1'
+measurementUnit name: 'area', description: 'square meter', symbol: 'm2', {
+    rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'volume', description: 'cubic meter', symbol: 'm3',{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'speed, velocity', description: 'meter per second', symbol: 'm/s',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'acceleration', description: 'meter per second squared  ', symbol: 'm/s2',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'wave number', description: 'reciprocal meter', symbol: 'm-1',{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'mass density', description: 'kilogram per cubic meter', symbol: 'kg/m3',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'surface density', description: 'kilogram per square metre', symbol: 'kg/m2',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'specific volume', description: 'cubic meter per kilogram', symbol: 'm3/kg',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'current density', description: 'ampere per square meter', symbol: 'A/m2',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'magnetic field strength  ', description: 'ampere per meter', symbol: 'A/m',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: 'amount-of-substance concentration', description: 'mole per cubic meter', symbol: 'mol/m3',{
+rel "relatedTo" to "SI", "mole"
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: 'luminance', description: 'candela per square meter', symbol: 'cd/m2',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: 'mass fraction', description: 'kilogram per kilogram', symbol: 'kg/kg = 1',{
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'plane angle', description:'radian (a)  (m·m-1 = 1 (b))', symbol: 'rad',{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'solid angle', description:'steradian (a)  (m2·m-2 = 1 (b))', symbol: 'sr (c)',{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'frequency', description:'hertz  (s-1)', symbol: 'Hz',{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'force', description:'newton  (m·kg·s-2)', symbol: 'N',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'pressure, stress', description:'pascal  (m-1·kg·s-2)', symbol: 'Pa',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'energy, work, quantity of heat', description:'joule  (m2·kg·s-2)', symbol: 'J',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'power, radiant flux', description:'watt  (m2·kg·s-3)', symbol: 'W',{
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'electric charge, quantity of electricity', description:'coulomb  (s·A)', symbol: 'C',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'electromotive force', description:'volt  (m2·kg·s-3·A-1)', symbol: 'V',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'capacitance', description:'farad  (m-2·kg-1·s4·A2)', symbol: 'F',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'electric resistance', description:'ohm  (m2·kg·s-3·A-2)', symbol: 'Omega',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'electric conductance', description:'siemens  (m-2·kg-1·s3·A2)', symbol: 'S',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'magnetic flux', description:'weber  (m2·kg·s-2·A-1)', symbol: 'Wb',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'magnetic flux density', description:'tesla  (kg·s-2·A-1)', symbol: 'T',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'inductance', description:'henry  (m2·kg·s-2·A-2)', symbol: 'H',{
+rel "relatedTo" to "SI", "ampere"
+rel "relatedTo" to "SI", "meter"
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'Celsius temperature', description:'degree Celsius  (K)', symbol: '°C',{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: 'luminous flux', description:'lumen  (m2·m-2·cd = cd)', symbol: 'lm',{
+rel "relatedTo" to "SI", "candela"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'illuminance', description:'lux  (m2·m-4·cd = m-2·cd)', symbol: 'lx',{
+rel "relatedTo" to "SI", "candela"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'activity (of a radionuclide)', description:'becquerel  (s-1)', symbol: 'Bq',{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'absorbed dose, specific energy (imparted), kerma', description:'gray  (m2·s-2)', symbol: 'Gy',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'dose equivalent (d)', description:'sievert  (m2·s-2)', symbol: 'Sv',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'catalytic activity', description:'katal  (s-1·mol)', symbol: 'kat',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'dynamic viscosity', description:'pascal second ', symbol: 'Pa·s',{
+rel "relatedTo" to "SI", "second"
+rel "relatedTo" to "pascal"
+}
+measurementUnit name: 'moment of force', description:'newton meter  ', symbol: 'N·m',{
+rel "relatedTo" to "force"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'surface tension', description:'newton per meter  ', symbol: 'N/m',{
+rel "relatedTo" to "force"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'angular velocity', description:'radian per second  ', symbol: 'rad/s',{
+rel "relatedTo" to "plane angle"
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'angular acceleration', description:'radian per second squared  ', symbol: 'rad/s2',{
+rel "relatedTo" to "plane angle"
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'heat flux density, irradiance', description:'watt per square meter ', symbol: 'W/m2',{
+rel "relatedTo" to "power, radiant flux"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'heat capacity, entropy', description:'joule per kelvin  ', symbol: 'J/K',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: 'specific heat capacity, specific entropy', description:'joule per kilogram kelvin  ()', symbol: 'J/(kg·K)',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "kelvin"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'specific energy', description:'joule per kilogram  ', symbol: 'J/kg',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'thermal conductivity', description:'watt per meter kelvin  ', symbol: 'W/(m·K)',{
+rel "relatedTo" to "power, radiant flux"
+rel "relatedTo" to "SI", "kelvin"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'energy density', description:'joule per cubic meter  ', symbol: 'J/m3',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'electric field strength', description:'volt per meter  ', symbol: 'V/m',{
+rel "relatedTo" to "electromotive force"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'electric charge density', description:'coulomb per cubic meter ', symbol: 'C/m3',{
+rel "relatedTo" to "electric charge, quantity of electricity"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'electric flux density', description:'coulomb per square meter  ', symbol: 'C/m2',{
+rel "relatedTo" to "electric charge, quantity of electricity"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'permittivity', description:'farad per meter  ', symbol: 'F/m',{
+rel "relatedTo" to "capacitance"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'permeability', description:'henry per meter  ', symbol: 'H/m',{
+rel "relatedTo" to "inductance"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'molar energy', description:'joule per mole  ', symbol: 'J/mol',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: 'molar entropy, molar heat capacity', description:'joule per mole kelvin  ()', symbol: 'J/(mol·K)',{
+rel "relatedTo" to "energy, work, quantity of heat"
+rel "relatedTo" to "SI", "mole"
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: 'exposure (x and gamma rays)', description:'coulomb per kilogram  ()', symbol: 'C/kg',{
+rel "relatedTo" to "electric charge, quantity of electricity"
+rel "relatedTo" to "SI", "kilogram"
+}
+measurementUnit name: 'absorbed dose rate', description:'gray per second  ', symbol: 'Gy/s',{
+rel "relatedTo" to "absorbed dose, specific energy (imparted), kerma"
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: 'radiant intensity', description:'watt per steradian  ', symbol: 'W/sr',{
+rel "relatedTo" to "power, radiant flux"
+rel "relatedTo" to "solid angle"
+}
+measurementUnit name: 'radiance', description:'watt per square meter steradian  ', symbol: 'W/(m2·sr)',{
+rel "relatedTo" to "power, radiant flux"
+rel "relatedTo" to "solid angle"
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: 'catalytic (activity) concentration', description:'katal per cubic meter ', symbol: 'kat/m3',{
+rel "relatedTo" to "catalytic activity"
+rel "relatedTo" to "SI", "meter"
+}
+
+measurementUnit name: "fahrenheit", description: "degrees fahrenheit (K)", symbol: "°F",{
+rel "relatedTo" to "kelvin"
+}
+
+
+}
+
+
+
