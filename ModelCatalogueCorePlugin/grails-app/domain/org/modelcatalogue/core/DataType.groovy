@@ -2,7 +2,6 @@ package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.api.ElementStatus
-import org.modelcatalogue.core.publishing.PublishingChain
 import org.modelcatalogue.core.publishing.PublishingContext
 import org.modelcatalogue.core.util.DataTypeRuleScript
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -157,10 +156,8 @@ class DataType extends CatalogueElement {
         'dataType'
     }
 
-    Integer countVersions() {
-        if (!latestVersionId) {
-            return 1
-        }
-        DataType.countByLatestVersionId(latestVersionId)
+    @Override
+    Long getFirstParentId() {
+        return getRelatedDataElements().find { it.getDataModelId() == getDataModelId() }?.getId() ?: super.getFirstParentId()
     }
 }

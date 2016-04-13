@@ -2,7 +2,6 @@ package org.modelcatalogue.core.c
 
 import org.modelcatalogue.core.geb.CatalogueAction
 import org.modelcatalogue.core.geb.CatalogueContent
-import spock.lang.Ignore
 
 import static org.modelcatalogue.core.geb.Common.*
 
@@ -15,10 +14,14 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
     public static final String expandTableHeader = '.inf-table thead .inf-cell-expand'
     public static final CatalogueContent nameFilter = CatalogueContent.create('input.form-control', placeholder: 'Filter Name')
     public static final CatalogueContent enumerationsTableEditor = CatalogueContent.create('table', title: 'Enumerations')
+    public static final CatalogueContent removeEnumerationOne = CatalogueContent.create('.soe-remove-row', 'data-for-property': '01')
+    public static final CatalogueContent enumerationsDetail = CatalogueContent.create('data-view-name':"Enumerations")
     public static final String tableRows = '.inf-table tbody .inf-table-item-row'
     public static final String pickReferenceType = '#pickReferenceType'
     public static final String pickPrimitiveType = '#pickPrimitiveType'
     public static final String pickEnumeratedType = '#pickEnumeratedType'
+    public static final String pickSubset = '#pickSubsetType'
+    public static final String baseEnumeration = '#baseEnumeration'
     public static final String updateMetadataButton = '.tab-pane button.btn-primary.update-object'
     public static final String addMetadataButton = '.tab-pane .btn.add-metadata'
     public static final String removeMetadataRow = '[data-view-content-name="Custom Metadata"] a.soe-remove-row'
@@ -49,32 +52,10 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
         check rightSideTitle is 'Data Types'
     }
 
-    def "filter by name in header"() {
-        check backdrop gone
-
-        when: "the header is expanded"
-        click expandTableHeader
-
-        then: "the name filter is displayed"
-        check nameFilter
-
-        when: "we filter by anatomical side"
-        fill nameFilter with 'anatomical side'
-
-        then: "only one row will be shown"
-        check tableRows test { it.size() == 1 }
-
-        when: "the filter is reset"
-        fill nameFilter with ''
-
-        then: "we see many rows again"
-        check tableRows test { it.size() >= 1 }
-    }
-
     def "create reference"() {
         select('Test 1') / 'Test 1'
 
-        addDataModelImport 'SI', 'XMLSchema', 'NHIC'
+        addDataModelImport 'XMLSchema', 'NHIC'
 
         selectInTree 'Data Types'
 
@@ -88,13 +69,16 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
         when:
         fill name with 'New Reference Type'
 
+
         click pickReferenceType
 
-        fill 'input#dataClass' with 'DEMOGRAPHICS' and prefer first existing item
+        fill 'dataClass' with 'DEMOGRAPHICS' and prefer first existing item
+        fill description with "Test Reference Unit"
 
         click save
 
         then:
+        check modalDialog gone
         check { infTableCell(1, 1, text: 'New Reference Type') } displayed
         check { infTableCell(1, 2, text: 'DEMOGRAPHICS') } displayed
     }
@@ -113,11 +97,13 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
         click pickPrimitiveType
 
 
-        fill 'input#measurementUnit' with 'new unit'
+        fill 'measurementUnit' with 'new unit'
+        fill description with "Test Primitive Unit"
 
         click save
 
         then:
+        check modalDialog gone
         check { infTableCell(1, 1, text: 'New Primitive Type') } displayed
         check { infTableCell(1, 2, text: 'new unit') } displayed
     }
@@ -131,24 +117,99 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
         check modalDialog displayed
 
         when:
-        fill name with 'New Enum Type'
+        fill name with 'Enumeration 1'
 
         click pickEnumeratedType
 
 
         check enumerationsTableEditor displayed
 
-        fillMetadata '01': 'one', '02': 'two'
+        fillMetadata '01': 'one', '02': 'two', '03': 'three', '04': 'four', '05': 'five'
 
         click save
 
         then:
+        check modalDialog gone
         check backdrop gone
-        check { infTableCell(1, 1, text: 'New Enum Type') } displayed
+        check { infTableCell(1, 1, text: 'Enumeration 1') } displayed
     }
+
+    def "create subset 2"() {
+        when:
+        check closeGrowlMessage gone
+        click create
+
+        then:
+        check modalDialog displayed
+
+        when:
+        fill name with 'Enumeration 2'
+
+        click pickSubset
+
+        check baseEnumeration displayed
+
+        fill baseEnumeration with 'Enumeration 1' and pick first item
+
+        click '#subtype-enum-1'
+        click '#subtype-enum-2'
+
+        click save
+
+        then:
+        check modalDialog gone
+        check backdrop gone
+        check { infTableCell(1, 1, text: 'Enumeration 2') } displayed
+    }
+
+    def "create subset 3"() {
+        when:
+        check closeGrowlMessage gone
+        click create
+
+        then:
+        check modalDialog displayed
+
+        when:
+        fill name with 'Enumeration 3'
+
+        click pickSubset
+
+        check baseEnumeration displayed
+
+        fill baseEnumeration with 'Enumeration 2' and pick first item
+
+        click '#subtype-enum-1'
+
+        click save
+
+        then:
+        check modalDialog gone
+        check backdrop gone
+        check { infTableCell(1, 1, text: 'Enumeration 3') } displayed
+        check { infTableCell(1, 2) } contains '01: one'
+    }
+
+    def "updating parent propagates to child and grandchild"() {
+        when:
+        refresh browser
+        select('Test 1') / 'Test 1' / 'Data Types' / 'Enumeration 1'
+
+        click inlineEdit
+        click removeEnumerationOne
+        click inlineEditSubmit
+
+        refresh browser
+        select('Test 1') / 'Test 1' / 'Data Types' / 'Enumeration 3'
+        then:
+
+        check enumerationsDetail missing 'one'
+    }
+
 
     def "create standard"() {
         when:
+        select('Test 1') / 'Test 1' / 'Data Types'
         check closeGrowlMessage gone
         click create
 
@@ -161,6 +222,7 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
         click save
 
         then:
+        check modalDialog gone
         check backdrop gone
         check { infTableCell(1, 1, text: 'New Data Type')} displayed
     }
@@ -194,6 +256,9 @@ class DataTypeWizardSpec extends AbstractModelCatalogueGebSpec {
 
         when:
         fillMetadata foo: 'bar'
+
+        scroll up
+
         click inlineEditSubmit
 
         then:

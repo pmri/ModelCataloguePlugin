@@ -4,6 +4,7 @@ import geb.Browser
 import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
 import geb.waiting.WaitTimeoutException
+import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.StaleElementReferenceException
 import org.openqa.selenium.logging.LogEntries
 import org.openqa.selenium.logging.LogEntry
@@ -99,9 +100,9 @@ abstract class AbstractModelCatalogueGebSpec extends GebReportingSpec {
     boolean selectCepItemIfExists(long waitTime = 3) {
         try {
             waitFor(waitTime) {
-                $('.cep-item, .item-found').displayed
+                $('.cep-item:not(.show-more-cep-item), .item-found').displayed
             }
-            $('.cep-item, .item-found').first().click()
+            $('.cep-item:not(.show-more-cep-item), .item-found').first().click()
             return true
         } catch (ignored) {
             return false
@@ -393,6 +394,10 @@ abstract class AbstractModelCatalogueGebSpec extends GebReportingSpec {
 
     void refresh(Browser browser) {
         browser.driver.navigate().refresh()
+    }
+
+    void scroll(ScrollDirection direction) {
+        direction.scroll(driver as JavascriptExecutor)
     }
 
 

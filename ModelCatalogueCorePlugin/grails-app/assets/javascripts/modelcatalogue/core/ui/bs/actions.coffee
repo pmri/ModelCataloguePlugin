@@ -26,6 +26,10 @@ angular.module('mc.core.ui.bs.actions', ['mc.util.ui.actions']).config ['actions
     return undefined if resource == 'batch'
     return undefined if not messages.hasPromptFactory('create-' + resource) and not messages.hasPromptFactory('edit-' + resource)
 
+    dataModel = anyParentDataModel($scope)
+
+    return undefined if dataModel and dataModel.status isnt 'DRAFT'
+
     {
     position:   100
     label:      "New #{names.getNaturalName(resource)}"
@@ -241,7 +245,7 @@ angular.module('mc.core.ui.bs.actions', ['mc.util.ui.actions']).config ['actions
   ]
 
   actionsProvider.registerActionInRoles 'export', [actionsProvider.ROLE_LIST_ACTION, actionsProvider.ROLE_ITEM_ACTION, actionsProvider.ROLE_NAVIGATION, actionsProvider.ROLE_LIST_HEADER_ACTION], ['$scope', 'security', ($scope, security)->
-    return undefined unless security.hasRole('VIEWER')
+    return undefined unless security.hasRole('CURATOR')
     return undefined unless $scope.list or $scope.element
     if $scope.list
       return undefined if $scope.resource == 'import'

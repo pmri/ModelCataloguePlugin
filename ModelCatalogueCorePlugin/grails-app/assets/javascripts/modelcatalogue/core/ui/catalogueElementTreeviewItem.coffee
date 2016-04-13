@@ -20,6 +20,21 @@ angular.module('mc.core.ui.catalogueElementTreeviewItem', ['mc.util.names', 'mc.
 
     controller: ['$scope', '$rootScope', '$element', 'catalogue', ($scope, $rootScope, $element, catalogue) ->
       $scope.nodeid = nodeid++
+      $scope.path = {segments: []}
+
+      startsWithSegment = (element, segments) ->
+        return false unless element
+        return false unless element.link
+        return false unless element.id
+        return false unless segments
+        return false unless segments.length > 0
+
+        firstSegment = segments[0]
+
+        return true if element.id == 'all' and element.link.indexOf(firstSegment.substring(0, firstSegment.lastIndexOf('/all'))) == 0
+        return true if element.link.indexOf(firstSegment) >= 0
+        return false
+
 
       getLocalName = (item) ->
         return undefined if not item
@@ -97,7 +112,15 @@ angular.module('mc.core.ui.catalogueElementTreeviewItem', ['mc.util.names', 'mc.
                 if key.indexOf('$') == 0
                   objectToExtend[key] = prop
 
-          newChildren.push(angular.extend(objectToExtend, it, {$$relationship: (if item.relation then item else undefined), $$metadata: item.ext, $$archived: item.archived, $$localName: getLocalName(item) }))
+          newChildren.push(
+            angular.extend(objectToExtend, it,
+              {
+                $$relationship: (if item.relation then item else undefined),
+                $$metadata: item.ext,
+                $$archived: item.archived,
+                $$localName: getLocalName(item)
+              })
+          )
 
         $scope.element.$$children = newChildren
         $scope.element.$$collapsed  = false
@@ -151,8 +174,7 @@ angular.module('mc.core.ui.catalogueElementTreeviewItem', ['mc.util.names', 'mc.
           $scope.descendFun(null, $scope.extraParameters).then(loadNewChildren).then ->
             $scope.element.$$loadingChildren = false
 
-        if $scope.extraParameters?.prefetch
-          console.log 'extra', $scope.extraParameters
+        if $scope.extraParameters?.prefetch or startsWithSegment($scope.element, $scope.extraParameters?.path?.segments)
           $scope.element.$$loadChildren()
 
       $scope.collapseOrExpand = ->
@@ -179,6 +201,20 @@ angular.module('mc.core.ui.catalogueElementTreeviewItem', ['mc.util.names', 'mc.
       $scope.select = (element) ->
         $scope.collapseOrExpand()
         $scope.treeview.select(element)
+
+      $scope.metadataOccurrencesToAsterisk = (element) ->
+        # only Data Element with some metadata and defined relationship
+        if element.$$metadata?.values? && element.getElementTypeName() == 'Data Element' && element.$$relationship
+          min = '0'
+          max = '*'
+          for row in element.$$metadata.values
+            if (row.key == 'Min Occurs')
+              min = row.value
+            else if (row.key == 'Max Occurs')
+              max = row.value
+          return "#{min}..#{max}"
+        else
+          return ""
 
       reloadChildrenOnChange = (_, result, url) ->
         if result.link == $scope.element.link
@@ -213,6 +249,11 @@ angular.module('mc.core.ui.catalogueElementTreeviewItem', ['mc.util.names', 'mc.
 
       $scope.$on 'listReferenceReordered', (ignored, listReference) ->
         reloadChildrenOnChange(ignored, listReference, listReference?.link)
+
+      $scope.$watch 'extraParameters.path.segments', (segments) ->
+        if startsWithSegment($scope.element, segments)
+          $scope.element.$$loadChildren()
+          $scope.path.segments = segments.slice(1) if segments.length > 1
     ]
   }
 ]
