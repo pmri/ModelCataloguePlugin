@@ -75,8 +75,8 @@ class CatalogueXmlImportSpec extends AbstractIntegrationSpec {
         loader.load(can)
 
         then:
-        DataModel.findByName("Cancer Model")
-        DataClass.findByName("Participant Information (GMC Clinic Registration)")
+        DataModel.findByName("COSD")
+        DataClass.findByName("Colorectal")
 
     }
 

@@ -31,6 +31,8 @@ public interface CatalogueElementProxy<T> extends CatalogueElement {
 
     void addToPendingRelationships(RelationshipProxy relationshipProxy);
 
+    boolean isRelationshipChangeVersioned();
+
     boolean isNew();
 
     /**

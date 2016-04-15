@@ -73,7 +73,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="NHS NUMBER STATUS INDICATOR CODE" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/82">
+                                    <dataType name="NHS NUMBER STATUS INDICATOR CODE">
                                         <enumerations>
                                             <enumeration value="08" id="1">Trace postponed (baby under six weeks old)</enumeration>
                                             <enumeration value="04" id="2">Trace attempted - No match or multiple match found</enumeration>
@@ -292,7 +292,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="PERSON GENDER CODE (CURRENT)" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/95">
+                                    <dataType name="PERSON GENDER CODE (CURRENT)" >
                                         <enumerations>
                                             <enumeration value="2" id="1">Female</enumeration>
                                             <enumeration value="1" id="2">Male</enumeration>
@@ -379,7 +379,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="ETHNIC CATEGORY" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/100">
+                                    <dataType name="ETHNIC CATEGORY" >
                                         <enumerations>
                                             <enumeration value="D" id="1">White and Black Caribbean</enumeration>
                                             <enumeration value="E" id="2">White and Black AfriTEST</enumeration>
@@ -422,7 +422,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="SOURCE OF REFERRAL FOR OUT-PATIENTS" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/103">
+                                    <dataType name="SOURCE OF REFERRAL FOR OUT-PATIENTS" >
                                         <enumerations>
                                             <enumeration value="97" id="1">other - not initiated by the CONSULTANT responsible for the Consultant Out-Patient Episode</enumeration>
                                             <enumeration value="93" id="2">referral from a Community Dental Service</enumeration>
@@ -602,7 +602,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="TESTCER OR SYMPTOMATIC BREAST REFERRAL PATIENT STATUS" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/112">
+                                    <dataType name="TESTCER OR SYMPTOMATIC BREAST REFERRAL PATIENT STATUS" >
                                         <enumerations>
                                             <enumeration value="21" id="1">Subsequent treatment commenced (English NHS only)</enumeration>
                                             <enumeration value="20" id="2">Diagnosis of recurrent TESTcer confirmed - subsequent English NHS treatment planned</enumeration>
@@ -648,7 +648,7 @@
                                     <dataType name="String" />
                                 </dataElement>
                             </dataClass>
-                            <dataClass name="IMAGING" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataClass/115">
+                            <dataClass name="IMAGING" >
                                 <dataElement name="SITE CODE (OF IMAGING)" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/116">
                                     <description>This is the ORGANISATION SITE CODE of the Organisation  where the imaging took place.</description>
                                     <extensions>
@@ -668,7 +668,7 @@
                                     </extensions>
                                     <dataType name="String" />
                                 </dataElement>
-                                <dataElement name="PROCEDURE DATE (TESTCER IMAGING)" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/117">
+                                <dataElement name="PROCEDURE DATE (TESTCER IMAGING)" >
                                     <description>The DATE the TESTcer Imaging was carried out.</description>
                                     <extensions>
                                         <extension key="NHIC_Identifier:">TEST_29</extension>
@@ -687,7 +687,7 @@
                                     </extensions>
                                     <dataType name="String" />
                                 </dataElement>
-                                <dataElement name="IMAGING CODE (NICIP)*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/118">
+                                <dataElement name="IMAGING CODE (NICIP)*">
                                     <description>*IMAGING CODE (NICIP)
                                         and/or
                                         (TESTCER IMAGING MODALITY and IMAGING ANATOMICAL SITE and ANATOMICAL SIDE (IMAGING))
@@ -713,7 +713,7 @@
                                     </extensions>
                                     <dataType name="String" />
                                 </dataElement>
-                                <dataElement name="TESTCER IMAGING MODALITY*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/120">
+                                <dataElement name="TESTCER IMAGING MODALITY*" >
                                     <description>*IMAGING CODE (NICIP)
                                         and/or
                                         (TESTCER IMAGING MODALITY and IMAGING ANATOMICAL SITE and ANATOMICAL SIDE (IMAGING))
@@ -737,7 +737,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2">from source</extension>
                                     </extensions>
-                                    <dataType name="TEST2 IMAGING MODALITY*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/119">
+                                    <dataType name="TEST2 IMAGING MODALITY*" >
                                         <enumerations>
                                             <enumeration value="C01X" id="1">Standard Radiography</enumeration>
                                             <enumeration value="C06X" id="2">Nuclear Medicine imaging</enumeration>
@@ -755,7 +755,7 @@
                                         </enumerations>
                                     </dataType>
                                 </dataElement>
-                                <dataElement name="IMAGING ANATOMICAL SITE*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/121">
+                                <dataElement name="IMAGING ANATOMICAL SITE*" >
                                     <description>*IMAGING CODE (NICIP)
                                         and/or
                                         (TESTCER IMAGING MODALITY and IMAGING ANATOMICAL SITE and ANATOMICAL SIDE (IMAGING))
@@ -782,7 +782,7 @@
                                     </extensions>
                                     <dataType name="String" />
                                 </dataElement>
-                                <dataElement name="ANATOMICAL SIDE (IMAGING)*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/123">
+                                <dataElement name="ANATOMICAL SIDE (IMAGING)*" >
                                     <description>*IMAGING CODE (NICIP)
                                         and/or
                                         (TESTCER IMAGING MODALITY and IMAGING ANATOMICAL SITE and ANATOMICAL SIDE (IMAGING))
@@ -804,7 +804,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2" />
                                     </extensions>
-                                    <dataType name="ANATOMICAL SIDE (IMAGING)*" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/122">
+                                    <dataType name="ANATOMICAL SIDE (IMAGING)*" >
                                         <enumerations>
                                             <enumeration value="B" id="1">Bilateral</enumeration>
                                             <enumeration value="R" id="2">Right</enumeration>
@@ -815,7 +815,7 @@
                                         </enumerations>
                                     </dataType>
                                 </dataElement>
-                                <dataElement name="GENDER2" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataElement/125">
+                                <dataElement name="GENDER2" >
                                     <description>gender test stuff</description>
                                     <extensions>
                                         <extension key="NHIC_Identifier:">TEST_GENDER</extension>
@@ -832,7 +832,7 @@
                                         <extension key="H">NEO4J</extension>
                                         <extension key="E2" />
                                     </extensions>
-                                    <dataType name="GENDER2" id="http://localhost:8090/ModelCatalogueCorePluginTestApp/catalogue/dataType/124">
+                                    <dataType name="GENDER2" >
                                         <enumerations>
                                             <enumeration value="2" id="1">Female</enumeration>
                                             <enumeration value="1" id="2">Male</enumeration>

@@ -254,6 +254,11 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
         }
     }
 
+    @Override
+    boolean isRelationshipChangeVersioned(){
+       relationships.size()==1 && relationships.first().relationshipTypeName==RelationshipType.baseType && relationships.first().source == this ? false : true
+    }
+
     boolean isRelationshipsChanged() {
         Set<Long> foundRelationships = []
 

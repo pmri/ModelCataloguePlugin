@@ -145,7 +145,7 @@ class CatalogueElementProxyRepository {
             for (CatalogueElementProxy element in elementProxiesToBeResolved) {
                 try {
                     String change = element.changed
-                    if (change && change != DefaultCatalogueElementProxy.CHANGE_NEW || element.getParameter('status') == ElementStatus.DRAFT) {
+                    if (change && change != DefaultCatalogueElementProxy.CHANGE_NEW && change != DefaultCatalogueElementProxy.CHANGE_RELATIONSHIP && element.isRelationshipChangeVersioned() || element.getParameter('status') == ElementStatus.DRAFT) {
                         if (element.domain == DataModel) {
                             draftRequiredDataModels.add(element)
                         } else if (element.classification) {
@@ -316,6 +316,7 @@ class CatalogueElementProxyRepository {
         }
         return DraftContext.importFriendly(elementsUnderControl)
     }
+
 
     protected static String getGenericNameForProxy(CatalogueElementProxy proxy) {
         "${CatalogueElement.simpleName}:${proxy.domain in HAS_UNIQUE_NAMES ? '*' : proxy.classification}:${proxy.name}"
