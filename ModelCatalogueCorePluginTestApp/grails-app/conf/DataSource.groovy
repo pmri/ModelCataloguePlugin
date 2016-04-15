@@ -10,11 +10,22 @@ environments {
     development {
         dataSource {
             pooled = true
-            driverClassName = "org.h2.Driver"
-            username = "sa"
-            password = ""
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/GEL3"
+            username = "root"
+            password = "root"
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            properties {
+                maxActive = -1
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=false
+                validationQuery="SELECT 1"
+                jdbcInterceptors="ConnectionState"
+            }
         }
     }
     test {

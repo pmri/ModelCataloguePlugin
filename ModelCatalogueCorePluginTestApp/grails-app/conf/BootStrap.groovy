@@ -3,6 +3,7 @@ import org.modelcatalogue.core.*
 import org.modelcatalogue.core.actions.*
 import org.modelcatalogue.core.dataarchitect.ColumnTransformationDefinition
 import org.modelcatalogue.core.dataarchitect.CsvTransformation
+import org.modelcatalogue.core.enumeration.Enumerations
 import org.modelcatalogue.core.security.Role
 import org.modelcatalogue.core.security.User
 import org.modelcatalogue.core.security.UserRole
@@ -11,6 +12,11 @@ import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.util.ExtensionModulesLoader
 import org.modelcatalogue.core.util.test.TestDataHelper
 import org.springframework.http.HttpMethod
+import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.json.JSONObject
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class BootStrap {
 
@@ -20,14 +26,24 @@ class BootStrap {
     def actionService
     def mappingService
     CatalogueBuilder catalogueBuilder
+    def sessionFactory
+    static final QUOTED_CHARS = [
+            "\\": "&#92;",
+            ":": "&#58;",
+            "|": "&#124;",
+            "%": "&#37;",
+    ]
 
     def init = { servletContext ->
         ExtensionModulesLoader.addExtensionModules()
 
         if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST]) {
-            initCatalogueService.initCatalogue(true)
-            initSecurity()
-            setupStuff()
+//            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
+                initCatalogueService.initCatalogue(true)
+                initSecurity()
+//                setupStuff()
+
+//            }
         } else {
             initCatalogueService.initDefaultRelationshipTypes()
             initSecurity()
@@ -233,4 +249,74 @@ class BootStrap {
         Requestmap.findOrSaveByUrlAndConfigAttributeAndHttpMethod(url, configAttribute, method, [failOnError: true])
     }
 
+    def migrate() {
+
+        def enums = EnumeratedType.list()
+
+        for (en in enums) {
+
+            EnumeratedType e = EnumeratedType.get(en.id)
+
+            println("processing " + en.name)
+            e.refresh()
+            e.enumAsString = Enumerations.from(stringToMap(removeUTFCharacters(en.enumAsString))).toJsonString()
+            e.save(flush: true, failOnError: true)
+        }
+    }
+
+
+
+    static Map<String, String> stringToMap(String s) {
+        if (s == null) return null
+        Map<String, String> ret = [:]
+        s.split(/\|/).each { String part ->
+            if (!part) return
+            String[] pair = part.split("(?<!\\\\):")
+            if (pair.length > 2) throw new IllegalArgumentException("Wrong enumerated value '$part' in encoded enumeration '$s'")
+            if (pair.length == 1) {
+                ret[unquote(pair[0])] = ''
+            } else {
+                ret[unquote(pair[0])] = unquote(pair[1])
+            }
+        }
+        return ret
+    }
+
+    static String quote(String s) {
+        if (s == null) return null
+        String ret = s
+        QUOTED_CHARS.each { original, replacement ->
+            ret = ret.replace(original, replacement)
+        }
+        ret
+    }
+
+    static String unquote(String s) {
+        if (s == null) return null
+        String ret = s
+        QUOTED_CHARS.reverseEach { original, pattern ->
+            ret = ret.replace(pattern, original)
+        }
+        ret
+    }
+
+    def removeUTFCharacters(String data) {
+        Pattern p = Pattern.compile("\\\\u(\\p{XDigit}{4})");
+        Matcher m = p.matcher(data);
+        StringBuffer buf = new StringBuffer(data.length());
+        while (m.find()) {
+            String ch = "";
+            m.appendReplacement(buf, Matcher.quoteReplacement(ch));
+        }
+        m.appendTail(buf);
+        return buf.toString();
+    }
+
+
+
 }
+
+
+
+
+

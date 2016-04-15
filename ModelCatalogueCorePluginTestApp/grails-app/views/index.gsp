@@ -51,15 +51,15 @@
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery${minSuffix}.js"></script>
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui${minSuffix}.js"></script>
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap${minSuffix}.js"></script>
-        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular${minSuffix}.js"></script>
+        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular${minSuffix}.js"></script>
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls${minSuffix}.js"></script>
 
         <!-- i18n 1.3.15 not present but hopefuly it's the same -->
-        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/i18n/angular-locale_en-gb.js"></script>
+        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/i18n/angular-locale_en-gb.js"></script>
 
-        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate${minSuffix}.js"></script>
-        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize${minSuffix}.js"></script>
-        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies${minSuffix}.js"></script>
+        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular-animate${minSuffix}.js"></script>
+        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular-sanitize${minSuffix}.js"></script>
+        <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular-cookies${minSuffix}.js"></script>
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rx-angular/1.1.3/rx.angular${minSuffix}.js"></script>
         <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.17.1/URI${minSuffix}.js"></script>
 
@@ -91,7 +91,8 @@
     <script type="text/javascript">
         ${configurationProvider.frontendConfiguration}
         var demoConfig = angular.module('demo.config', ['mc.core.modelCatalogueApiRoot', 'mc.util.security']);
-        demoConfig.config(['securityProvider', function (securityProvider) {
+        demoConfig.config(['$logProvider', 'securityProvider', function ($logProvider, securityProvider) {
+            $logProvider.debugEnabled(${Environment.current == Environment.DEVELOPMENT ? 'true' : 'false'});
             securityProvider.springSecurity({
                 oauthProviders: ${oauthService.services.keySet().collect{"'$it'"}},
                 contextPath:      '${grailsApplication.config.grails.app.context ?: request.contextPath ?: ''}',
@@ -118,11 +119,11 @@
 
         }]);
 
-        demoConfig.run(function(editableOptions, editableThemes) {
+        demoConfig.run(['editableOptions', 'editableThemes', function(editableOptions, editableThemes) {
             editableThemes.bs3.inputClass = 'input-xs';
             editableThemes.bs3.buttonsClass = 'btn-sm';
             editableOptions.theme = 'bs3';
-        });
+        }]);
 
         modelcatalogue.registerModule('demo.config');
 
@@ -131,19 +132,19 @@
         modelcatalogue.welcome.info = "${grailsApplication.config.mc.welcome.info.encodeAsJSON()}";
 
         // create an app module based on registered modules
-        angular.module('metadataCurator', window.modelcatalogue.getModules()).run(function($state){
+        angular.module('metadataCurator', window.modelcatalogue.getModules()).run(['$state', function($state){
             // workaround https://github.com/angular-ui/ui-router/issues/2051
-        })
+        }])
     </script>
     <g:if test="${Environment.current in [Environment.DEVELOPMENT, Environment.TEST, Environment.CUSTOM]}">
         <script type="text/javascript">
-            angular.module('demo.config').factory('$exceptionHandler', function($log, $window) {
+            angular.module('demo.config').factory('$exceptionHandler', ['$log', '$window', function($log, $window) {
                 return function(exception, cause) {
                     $log.error(exception, cause);
                     window.printErrorInPre($window.location.href);
                     window.printErrorInPre(exception.stack);
                 };
-            });
+            }]);
 
         </script>
     </g:if>
@@ -151,7 +152,7 @@
 </head>
 
 <body>
-<div id="metadataCurator" ng-app="metadataCurator" >
+<div id="metadataCurator" ng-app="metadataCurator" ng-strict-di>
             <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
