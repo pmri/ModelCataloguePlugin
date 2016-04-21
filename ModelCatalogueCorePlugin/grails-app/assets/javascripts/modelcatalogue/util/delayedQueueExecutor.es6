@@ -1,6 +1,6 @@
 
 angular.module('mc.util.delayedQueueExecutor', ['mc.util.delayedQueueExecutor'])
-    .factory('delayedQueueExecutor', function($timeout){
+    .factory('delayedQueueExecutor', function($q, $timeout){
         class DelayedQueueExecutor {
             constructor(delayBetweenCalls) {
                 this.delayBetweenCalls = delayBetweenCalls;

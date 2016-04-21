@@ -23,7 +23,12 @@ module.exports = function(config) {
 
         files: [
             // Required libraries
+            'grails-app/assets/jslibs/saxonce/Saxonce.nocache.js',
             'grails-app/assets/bower_components/rxjs/dist/rx.all.js',
+            'grails-app/assets/bower_components/blob-polyfill/Blob.js',
+            'grails-app/assets/bower_components/file-saver.js/FileSaver.js',
+            'grails-app/assets/bower_components/ace-builds/src-min-noconflict/ace.js',
+            'grails-app/assets/bower_components/vk-beautify/dist/vkbeautify.0.99.00.beta.js',
             'grails-app/assets/bower_components/jquery/dist/jquery.js',
             'grails-app/assets/bower_components/angular/angular.js',
             'grails-app/assets/bower_components/angular-cookies/angular-cookies.js',
@@ -33,6 +38,8 @@ module.exports = function(config) {
             'grails-app/assets/bower_components/angular-ui-router/release/angular-ui-router.js',
             'grails-app/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'grails-app/assets/bower_components/angular-rx/dist/rx.angular.js',
+            'grails-app/assets/bower_components/angular-ui-ace/ui-ace.js',
+            'grails-app/assets/bower_components/angular-file-saver/dist/angular-file-saver.js',
 
             'grails-app/assets/jslibs/google-diff-match-patch/javascript/diff_match_patch.js',
 
