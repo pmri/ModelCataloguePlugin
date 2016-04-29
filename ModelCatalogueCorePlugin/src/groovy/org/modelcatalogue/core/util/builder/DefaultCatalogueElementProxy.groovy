@@ -4,6 +4,7 @@ import grails.compiler.GrailsCompileStatic
 import groovy.util.logging.Log4j
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
+import org.modelcatalogue.core.enumeration.Enumerations
 import org.modelcatalogue.core.util.Legacy
 
 import java.lang.reflect.Modifier
@@ -185,6 +186,17 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
                     // automatic description can't replace one already set
                     return false
                 }
+                if (key == 'enumerations'){
+
+                    Enumerations c = (Enumerations) currentValue
+                    Map v = (Map) value
+
+                    if(normalizeWhitespace(c.entrySet().toString()).equals(normalizeWhitespace(v.entrySet().toString()))){
+                        return false
+                    }
+
+                }
+
                 log.debug "$this has changed at least one property - property $key (different value)\n\n===NEW===\n${normalizeWhitespace(value)}\n===OLD===\n${normalizeWhitespace(currentValue)}\n========="
                 return true
             }
@@ -201,6 +213,7 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
             result
         }
     }
+
 
     String getChanged() {
         try {
