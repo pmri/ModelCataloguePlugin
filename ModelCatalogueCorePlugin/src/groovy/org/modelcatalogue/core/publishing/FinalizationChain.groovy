@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.publishing
 
 import groovy.util.logging.Log4j
+import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -59,6 +60,7 @@ class FinalizationChain extends PublishingChain {
     }
 
     private boolean ableToFinalize(CatalogueElement element) {
+
         if (element.status == ElementStatus.FINALIZED) {
             // it's finalized already
             return true
@@ -83,7 +85,7 @@ class FinalizationChain extends PublishingChain {
         if (published.latestVersionId) {
             List<CatalogueElement> previousFinalized = HibernateHelper.getEntityClass(published).findAllByLatestVersionIdAndStatus(published.latestVersionId, ElementStatus.FINALIZED)
             for (CatalogueElement e in previousFinalized) {
-                if (e != published) {
+                if (e.id != published.getId()) {
                     archiver.archive(e, true)
                 }
             }

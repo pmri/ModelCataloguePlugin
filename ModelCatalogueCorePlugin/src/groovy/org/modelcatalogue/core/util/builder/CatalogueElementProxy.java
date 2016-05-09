@@ -35,6 +35,8 @@ public interface CatalogueElementProxy<T> extends CatalogueElement {
 
     boolean isNew();
 
+    boolean isReplaced();
+
     /**
      * @return <code>false</code> if the proxy is only referenced from the builder and very likely it hasn't been
      * created by the builder

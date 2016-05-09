@@ -4,6 +4,7 @@ import grails.util.Holders
 import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.api.ElementStatus
@@ -51,6 +52,7 @@ class DraftChain extends PublishingChain {
         DataModel draftDataModel = createDraft(publishedDataModel, null, publisher)
 
         for (CatalogueElement element in publishedDataModel.declares) {
+            element = GrailsHibernateUtil.unwrapIfProxy(element)
             createDraft(element, draftDataModel, publisher)
         }
 

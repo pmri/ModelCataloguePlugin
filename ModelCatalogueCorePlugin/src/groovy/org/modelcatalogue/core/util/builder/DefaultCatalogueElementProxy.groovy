@@ -68,6 +68,13 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
         return newlyCreated
     }
 
+    boolean isReplaced(){
+        if(replacedBy){
+            return true
+        }
+        return false
+    }
+
     @Override
     final T resolve() {
         try {

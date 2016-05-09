@@ -180,9 +180,9 @@ abstract class CatalogueElementPrintHelper<E extends CatalogueElement> {
 
         if (element.dataModel) {
             if (context.currentClassification == element.dataModel) {
-                return [name: element.name]
+                return [name: element.name, id: element.getDefaultModelCatalogueId(true)]
             } else {
-                return [name: element.name, dataModel: element.dataModel.name]
+                return [name: element.name, dataModel: element.dataModel.name, id: element.getDefaultModelCatalogueId(true)]
             }
         }
 

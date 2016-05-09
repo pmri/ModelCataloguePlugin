@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import org.hibernate.FetchMode
 import org.modelcatalogue.core.publishing.PublishingChain
 import org.modelcatalogue.core.publishing.PublishingContext
 import org.modelcatalogue.core.util.Legacy
@@ -48,7 +49,12 @@ class DataModel extends CatalogueElement {
     }
 
     List<CatalogueElement> getDeclares() {
-        CatalogueElement.findAllByDataModel(this)
+        CatalogueElement.createCriteria().list{
+            fetchMode 'dataModel', FetchMode.JOIN
+            dataModel{
+                eq 'id', this.id
+            }
+        }
     }
 
     Number countDeclares() {

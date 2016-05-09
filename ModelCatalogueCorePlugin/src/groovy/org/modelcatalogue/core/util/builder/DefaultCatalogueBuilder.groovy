@@ -662,7 +662,7 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
     protected <T extends CatalogueElement, A extends CatalogueElementProxy<T>> A createProxy(Class<T> domain, Map<String, Object> parameters, Class inheritFrom = null, boolean underControl = false) {
         if (inheritFrom && domain in SUPPORTED_FOR_AUTO) {
             context.withContextElement(inheritFrom) {
-                if (!parameters.name) {
+                if (!parameters.name && !parameters.id) {
                     if (it.name) {
                         parameters.name = it.name
                         parameters[CatalogueElementProxyRepository.AUTOMATIC_NAME_FLAG] = true
@@ -698,7 +698,7 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
             element.setParameter(key, value)
         }
 
-        classifyIfNeeded element
+        if(parameters.name) classifyIfNeeded element
 
         element
     }

@@ -145,17 +145,21 @@ class CatalogueElementProxyRepository {
             for (CatalogueElementProxy element in elementProxiesToBeResolved) {
                 try {
                     String change = element.changed
-                    if (change && change != DefaultCatalogueElementProxy.CHANGE_NEW && change != DefaultCatalogueElementProxy.CHANGE_RELATIONSHIP && element.isRelationshipChangeVersioned() || element.getParameter('status') == ElementStatus.DRAFT) {
+                    if (!element.isReplaced() && change && change != DefaultCatalogueElementProxy.CHANGE_NEW && change != DefaultCatalogueElementProxy.CHANGE_RELATIONSHIP && element.isRelationshipChangeVersioned() || element.getParameter('status') == ElementStatus.DRAFT) {
                         if (element.domain == DataModel) {
-                            draftRequiredDataModels.add(element)
+                            draftRequiredDataModels = addDraftModel(draftRequiredDataModels,element)
+                            println("changed element" + element.name  + " - " + element.changed+ " - " + element.classification)
                         } else if (element.classification) {
-                            draftRequiredDataModels.add(byName[getFullNameForDataModel(element.classification)] ?: byName[getGenericNameForDataModel(element.classification)] ?: createProxy(DataModel, [name: element.classification as Object]))
+                            draftRequiredDataModels = addDraftModel(draftRequiredDataModels,(byName[getFullNameForDataModel(element.classification)] ?: byName[getGenericNameForDataModel(element.classification)] ?: createProxy(DataModel, [name: element.classification as Object])))
+                            println("changed element" + element.name  + " - " + element.changed+ " - " + element.classification)
                         } else {
                             logWarn "Cannot request draft for element without data model: $element"
                         }
                         if (change == DefaultCatalogueElementProxy.CHANGE_TYPE) {
                             context.changeType(element.findExisting() as CatalogueElement, element.domain)
                         }
+
+
                     }
 
                 } catch (e) {
@@ -219,7 +223,8 @@ class CatalogueElementProxyRepository {
                 if (anyCause(e,ReferenceNotPresentInTheCatalogueException)) {
                     logWarn "Some item referred by ${relationshipProxy} not present in the catalogue"
                 } else {
-                    throw e
+                    logWarn "relationship not resolved"
+//                    throw e
                 }
             }
         }
@@ -281,6 +286,13 @@ class CatalogueElementProxyRepository {
         logInfo "Proxies resolved:\n${watch.prettyPrint()}"
 
         created
+    }
+
+    protected Set<CatalogueElementProxy> addDraftModel(Set<CatalogueElementProxy> draftRequiredDataModels, CatalogueElementProxy draftModel){
+        if(!draftRequiredDataModels.find{it.name == draftModel.name}) {
+            draftRequiredDataModels.add(draftModel)
+        }
+        draftRequiredDataModels
     }
 
     protected Set<Long> collectElementsUnderControl(Set<CatalogueElementProxy> elementProxiesToBeResolved) {
