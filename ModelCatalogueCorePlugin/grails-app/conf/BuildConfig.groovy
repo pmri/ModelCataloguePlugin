@@ -57,7 +57,7 @@ grails.project.dependency.resolution = {
         // compile 'io.reactivex:rxgroovy:1.0.3'
 
 
-        String mcToolkitVersion = '2.0.0-alpha-05'
+        String mcToolkitVersion = '2.0.0-alpha-06'
         compile "org.modelcatalogue:mc-core-api:$mcToolkitVersion"
         compile "org.modelcatalogue:mc-builder-api:$mcToolkitVersion"
         //compile "org.modelcatalogue:mc-integration-excel:$mcToolkitVersion"
@@ -79,6 +79,8 @@ grails.project.dependency.resolution = {
         compile 'net.sourceforge.owlapi:owlapi-oboformat:3.5.1'
         compile 'net.sourceforge.owlapi:owlapi-api:3.5.1'
         compile 'net.sourceforge.owlapi:owlapi-parsers:3.5.1'
+
+        compile 'org.gperfutils:gprof:0.3.1-groovy-2.4'
 
         test 'xmlunit:xmlunit:1.6'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
@@ -121,7 +123,7 @@ grails.project.dependency.resolution = {
         // test coverage
         test ":code-coverage:1.2.7"
 
-        build ':tomcat:8.0.30'
+        build ':tomcat:8.0.33'
 		//jasper report generator see in dependencies
 
     }
