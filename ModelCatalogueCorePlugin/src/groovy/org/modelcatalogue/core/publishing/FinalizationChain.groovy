@@ -42,6 +42,7 @@ class FinalizationChain extends PublishingChain {
 
         for (Collection<CatalogueElement> elements in queue) {
             for (CatalogueElement element in elements) {
+                element = GrailsHibernateUtil.unwrapIfProxy(element)
                 if (element.id in processed || isUpdatingInProgress(element)) {
                     continue
                 }

@@ -377,6 +377,427 @@ measurementUnit name: "fahrenheit", description: "degrees fahrenheit (K)", symbo
 rel "relatedTo" to "kelvin"
 }
 
+measurementUnit name: "yottaampere", description: "ampere*10^24", symbol: "YA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "zettaampere", description: "ampere*10^21", symbol: "ZA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "exaampere", description: "ampere*10^18", symbol: "EA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "petaampere", description: "ampere*10^15", symbol: "PA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "teraampere", description: "ampere*10^12", symbol: "TA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "gigaampere", description: "ampere*10^9", symbol: "GA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "megaampere", description: "ampere*10^6", symbol: "MA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "kiloampere", description: "ampere*10^3", symbol: "kA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "hectoampere", description: "ampere*10^2", symbol: "hA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "dekaampere", description: "ampere*10^1", symbol: "daA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "deciampere", description: "ampere*10^-1", symbol: "dA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "centiampere", description: "ampere*10^-2", symbol: "cA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "milliampere", description: "ampere*10^-3", symbol: "mA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "microampere", description: "ampere*10^-6", symbol: "µA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "nanoampere", description: "ampere*10^-9", symbol: "nA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "picoampere", description: "ampere*10^-12", symbol: "pA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "femtoampere", description: "ampere*10^-15", symbol: "fA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "attoampere", description: "ampere*10^-18", symbol: "aA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "zeptoampere", description: "ampere*10^-21", symbol: "zA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "yoctoampere", description: "ampere*10^-24", symbol: "yA" ,{
+rel "relatedTo" to "SI", "ampere"
+}
+measurementUnit name: "yottacandela", description: "candela*10^24", symbol: "Ycd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "zettacandela", description: "candela*10^21", symbol: "Zcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "exacandela", description: "candela*10^18", symbol: "Ecd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "petacandela", description: "candela*10^15", symbol: "Pcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "teracandela", description: "candela*10^12", symbol: "Tcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "gigacandela", description: "candela*10^9", symbol: "Gcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "megacandela", description: "candela*10^6", symbol: "Mcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "kilocandela", description: "candela*10^3", symbol: "kcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "hectocandela", description: "candela*10^2", symbol: "hcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "dekacandela", description: "candela*10^1", symbol: "dacd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "decicandela", description: "candela*10^-1", symbol: "dcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "centicandela", description: "candela*10^-2", symbol: "ccd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "millicandela", description: "candela*10^-3", symbol: "mcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "microcandela", description: "candela*10^-6", symbol: "µcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "nanocandela", description: "candela*10^-9", symbol: "ncd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "picocandela", description: "candela*10^-12", symbol: "pcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "femtocandela", description: "candela*10^-15", symbol: "fcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "attocandela", description: "candela*10^-18", symbol: "acd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "zeptocandela", description: "candela*10^-21", symbol: "zcd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "yoctocandela", description: "candela*10^-24", symbol: "ycd" ,{
+rel "relatedTo" to "SI", "candela"
+}
+measurementUnit name: "yottakelvin", description: "kelvin*10^24", symbol: "YK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "zettakelvin", description: "kelvin*10^21", symbol: "ZK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "exakelvin", description: "kelvin*10^18", symbol: "EK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "petakelvin", description: "kelvin*10^15", symbol: "PK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "terakelvin", description: "kelvin*10^12", symbol: "TK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "gigakelvin", description: "kelvin*10^9", symbol: "GK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "megakelvin", description: "kelvin*10^6", symbol: "MK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "kilokelvin", description: "kelvin*10^3", symbol: "kK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "hectokelvin", description: "kelvin*10^2", symbol: "hK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "dekakelvin", description: "kelvin*10^1", symbol: "daK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "decikelvin", description: "kelvin*10^-1", symbol: "dK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "centikelvin", description: "kelvin*10^-2", symbol: "cK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "millikelvin", description: "kelvin*10^-3", symbol: "mK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "microkelvin", description: "kelvin*10^-6", symbol: "µK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "nanokelvin", description: "kelvin*10^-9", symbol: "nK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "picokelvin", description: "kelvin*10^-12", symbol: "pK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "femtokelvin", description: "kelvin*10^-15", symbol: "fK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "attokelvin", description: "kelvin*10^-18", symbol: "aK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "zeptokelvin", description: "kelvin*10^-21", symbol: "zK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "yoctokelvin", description: "kelvin*10^-24", symbol: "yK" ,{
+rel "relatedTo" to "SI", "kelvin"
+}
+measurementUnit name: "yottagram", description: "gram*10^24", symbol: "Yg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "zettagram", description: "gram*10^21", symbol: "Zg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "exagram", description: "gram*10^18", symbol: "Eg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "petagram", description: "gram*10^15", symbol: "Pg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "teragram", description: "gram*10^12", symbol: "Tg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "gigagram", description: "gram*10^9", symbol: "Gg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "megagram", description: "gram*10^6", symbol: "Mg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "hectogram", description: "gram*10^2", symbol: "hg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "dekagram", description: "gram*10^1", symbol: "dag" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "decigram", description: "gram*10^-1", symbol: "dg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "centigram", description: "gram*10^-2", symbol: "cg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "milligram", description: "gram*10^-3", symbol: "mg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "microgram", description: "gram*10^-6", symbol: "µg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "nanogram", description: "gram*10^-9", symbol: "ng" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "picogram", description: "gram*10^-12", symbol: "pg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "femtogram", description: "gram*10^-15", symbol: "fg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "attogram", description: "gram*10^-18", symbol: "ag" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "zeptogram", description: "gram*10^-21", symbol: "zg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "yoctogram", description: "gram*10^-24", symbol: "yg" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "gram", description: "kilogram*10^-3", symbol: "g" ,{
+rel "relatedTo" to "SI Derived Units", "gram"
+}
+measurementUnit name: "yottameter", description: "meter*10^24", symbol: "Ym" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "zettameter", description: "meter*10^21", symbol: "Zm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "exameter", description: "meter*10^18", symbol: "Em" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "petameter", description: "meter*10^15", symbol: "Pm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "terameter", description: "meter*10^12", symbol: "Tm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "gigameter", description: "meter*10^9", symbol: "Gm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "megameter", description: "meter*10^6", symbol: "Mm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "kilometer", description: "meter*10^3", symbol: "km" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "hectometer", description: "meter*10^2", symbol: "hm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "dekameter", description: "meter*10^1", symbol: "dam" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "decimeter", description: "meter*10^-1", symbol: "dm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "centimeter", description: "meter*10^-2", symbol: "cm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "millimeter", description: "meter*10^-3", symbol: "mm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "micrometer", description: "meter*10^-6", symbol: "µm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "nanometer", description: "meter*10^-9", symbol: "nm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "picometer", description: "meter*10^-12", symbol: "pm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "femtometer", description: "meter*10^-15", symbol: "fm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "attometer", description: "meter*10^-18", symbol: "am" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "zeptometer", description: "meter*10^-21", symbol: "zm" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "yoctometer", description: "meter*10^-24", symbol: "ym" ,{
+rel "relatedTo" to "SI", "meter"
+}
+measurementUnit name: "yottamole", description: "mole*10^24", symbol: "Ymol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "zettamole", description: "mole*10^21", symbol: "Zmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "examole", description: "mole*10^18", symbol: "Emol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "petamole", description: "mole*10^15", symbol: "Pmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "teramole", description: "mole*10^12", symbol: "Tmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "gigamole", description: "mole*10^9", symbol: "Gmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "megamole", description: "mole*10^6", symbol: "Mmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "kilomole", description: "mole*10^3", symbol: "kmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "hectomole", description: "mole*10^2", symbol: "hmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "dekamole", description: "mole*10^1", symbol: "damol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "decimole", description: "mole*10^-1", symbol: "dmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "centimole", description: "mole*10^-2", symbol: "cmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "millimole", description: "mole*10^-3", symbol: "mmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "micromole", description: "mole*10^-6", symbol: "µmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "nanomole", description: "mole*10^-9", symbol: "nmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "picomole", description: "mole*10^-12", symbol: "pmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "femtomole", description: "mole*10^-15", symbol: "fmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "attomole", description: "mole*10^-18", symbol: "amol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "zeptomole", description: "mole*10^-21", symbol: "zmol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "yoctomole", description: "mole*10^-24", symbol: "ymol" ,{
+rel "relatedTo" to "SI", "mole"
+}
+measurementUnit name: "yottasecond", description: "second*10^24", symbol: "Ys" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "zettasecond", description: "second*10^21", symbol: "Zs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "exasecond", description: "second*10^18", symbol: "Es" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "petasecond", description: "second*10^15", symbol: "Ps" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "terasecond", description: "second*10^12", symbol: "Ts" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "gigasecond", description: "second*10^9", symbol: "Gs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "megasecond", description: "second*10^6", symbol: "Ms" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "kilosecond", description: "second*10^3", symbol: "ks" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "hectosecond", description: "second*10^2", symbol: "hs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "dekasecond", description: "second*10^1", symbol: "das" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "decisecond", description: "second*10^-1", symbol: "ds" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "centisecond", description: "second*10^-2", symbol: "cs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "millisecond", description: "second*10^-3", symbol: "ms" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "microsecond", description: "second*10^-6", symbol: "µs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "nanosecond", description: "second*10^-9", symbol: "ns" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "picosecond", description: "second*10^-12", symbol: "ps" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "femtosecond", description: "second*10^-15", symbol: "fs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "attosecond", description: "second*10^-18", symbol: "as" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "zeptosecond", description: "second*10^-21", symbol: "zs" ,{
+rel "relatedTo" to "SI", "second"
+}
+measurementUnit name: "yoctosecond", description: "second*10^-24", symbol: "ys" ,{
+rel "relatedTo" to "SI", "second"
+}
+
 
 }
 

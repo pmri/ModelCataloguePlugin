@@ -8,6 +8,7 @@ import grails.util.GrailsNameUtils
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
+import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.enumeration.Enumerations
@@ -53,6 +54,7 @@ class ElementService implements Publisher<CatalogueElement> {
 
 
     public DataModel createDraftVersion(DataModel dataModel, String newSemanticVersion, DraftContext context) {
+        clearCache()
         dataModel.checkNewSemanticVersion(newSemanticVersion)
 
         if (dataModel.hasErrors()) {
@@ -258,6 +260,10 @@ class ElementService implements Publisher<CatalogueElement> {
 
 
     CatalogueElement archive(CatalogueElement archived, boolean archiveRelationships) {
+
+
+        archived = GrailsHibernateUtil.unwrapIfProxy(archived)
+
         if (archived.archived) {
             return archived
         }
@@ -301,6 +307,7 @@ class ElementService implements Publisher<CatalogueElement> {
      * @deprecated skipping the eligibility is only available for tests
      */
     public DataModel finalizeDataModel(DataModel draft, String version, String revisionNotes, boolean skipEligibility) {
+        clearCache()
         // check eligibility for finalization
         if (!skipEligibility) {
             draft.checkFinalizeEligibility(version, revisionNotes)

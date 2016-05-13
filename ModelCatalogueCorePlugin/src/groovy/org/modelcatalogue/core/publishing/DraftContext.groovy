@@ -23,7 +23,7 @@ class DraftContext extends PublishingContext<DraftContext> {
     }
 
     static DraftContext importFriendly(Set<Long> elementsUnderControl) {
-        new DraftContext(true, elementsUnderControl)
+        new DraftContext(false, elementsUnderControl)
     }
 
     DraftContext forceNew() {

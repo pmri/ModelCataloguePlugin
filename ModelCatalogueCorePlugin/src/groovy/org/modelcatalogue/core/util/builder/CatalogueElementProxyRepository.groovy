@@ -232,6 +232,9 @@ class CatalogueElementProxyRepository {
         // TODO: collect the ids of relationships resolved and than do the same comparison like in the is relationship
         // changed
         if (!copyRelationships) {
+
+            Set<CatalogueElement> obsoleteCandidates = []
+
             elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
                 if (!element.underControl) {
                     return
@@ -243,9 +246,23 @@ class CatalogueElementProxyRepository {
 
                 relations.removeAll resolvedRelationships
 
-                relations.collect { Relationship.get(it) } each {
+                relations.collect { Relationship.get(it) } each { Relationship it ->
+
+                    if(it.relationshipType==RelationshipType.containmentType || it.relationshipType==RelationshipType.hierarchyType){
+                        obsoleteCandidates.add(it.destination)
+                    }
+
                     unlink(it)
                 }
+
+
+            }
+
+            obsoleteCandidates.each{ CatalogueElement it ->
+                if(!created.contains(it)){
+                    elementService.archive(it, true)
+                }
+
             }
         }
 
@@ -281,6 +298,9 @@ class CatalogueElementProxyRepository {
 
 
         }
+
+
+
         watch.stop()
 
         logInfo "Proxies resolved:\n${watch.prettyPrint()}"
@@ -296,7 +316,6 @@ class CatalogueElementProxyRepository {
     }
 
     protected Set<Long> collectElementsUnderControl(Set<CatalogueElementProxy> elementProxiesToBeResolved) {
-        Set<Long> elementsUnderControl = new HashSet<Long>()
         elementProxiesToBeResolved.each { CatalogueElementProxy it ->
             if (!it.underControl) {
                 return
