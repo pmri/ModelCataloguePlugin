@@ -12,6 +12,7 @@ angular.module 'mc.core', [
   'mc.core.actionEnhancer'
   'mc.core.listReferenceEnhancer'
   'mc.core.modelCatalogueApiRoot'
+  'mc.core.modelCatalogueServerUrl'
   'mc.core.modelCatalogueSearch'
   'mc.core.modelCatalogueDataArchitect'
   'mc.core.removableItemEnhancer'

@@ -1,7 +1,7 @@
-angular.module('mc.core.ui.states.controllers.XmlEditorCtrl', ['ui.ace', 'ngFileSaver', 'mc.util.xsltTransformer'])
+angular.module('mc.core.ui.states.controllers.XmlEditorCtrl', ['ui.ace', 'ngFileSaver', 'mc.util.xsltTransformer', 'mc.core.modelCatalogueServerUrl'])
 .controller('mc.core.ui.states.controllers.XmlEditorCtrl', [
-  '$log', '$scope', '$stateParams', '$state', '$timeout', 'element', 'applicationTitle', '$http', 'catalogue', 'security', 'FileSaver', 'Blob', 'xsltTransformer',
-  ($log, $scope, $stateParams, $state, $timeout, element, applicationTitle, $http, catalogue, security, FileSaver, Blob, xsltTransformer) ->
+  '$log', '$scope', '$stateParams', '$state', '$timeout', 'element', 'applicationTitle', '$http', 'catalogue', 'security', 'FileSaver', 'Blob', 'xsltTransformer', 'modelCatalogueServerUrl'
+  ($log, $scope, $stateParams, $state, $timeout, element, applicationTitle, $http, catalogue, security, FileSaver, Blob, xsltTransformer, modelCatalogueServerUrl) ->
 
     applicationTitle "Xml Editor for #{element.getLabel()}"
     $scope.element = element

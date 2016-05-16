@@ -13,6 +13,8 @@ class ApiRootFrontendConfigurationProvider extends  FrontendConfigurationProvide
         """
         angular.module('mc.core.currentApiRoot', ['mc.core.modelCatalogueApiRoot']).value('modelCatalogueApiRoot', '${grailsApplication.config.grails.serverURL}/api/modelCatalogue/core');
         modelcatalogue.registerModule('mc.core.currentApiRoot');
+        angular.module('mc.core.currentModelCatalogueServerUrl', ['mc.core.modelCatalogueServerUrl']).value('modelCatalogueServerUrl', '${grailsApplication.config.grails.serverURL}');
+        modelcatalogue.registerModule('mc.core.currentModelCatalogueServerUrl');
         """
     }
 }
