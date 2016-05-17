@@ -7,11 +7,14 @@ angular.module('mc.core.ui.states.controllers.XmlEditorCtrl', ['ui.ace', 'ngFile
     $scope.element = element
     $scope.transformationInProgress = false
 
+
+
     transform = (newValues) ->
       xml = newValues[0]
       xslt = newValues[1]
 
       return unless xml and xslt
+
       $log.debug("transformation started", {xml: xml, xslt: xslt})
 
       $timeout( ->
@@ -35,7 +38,9 @@ angular.module('mc.core.ui.states.controllers.XmlEditorCtrl', ['ui.ace', 'ngFile
       $scope.xml = resp.data
 
     $http.get("#{security.contextPath}#{catalogue.getDefaultXslt(element.elementType) ? catalogue.getDefaultXslt('catalogueElement')}").then (resp) ->
-      $scope.xslt = resp.data
+      catURL = modelCatalogueServerUrl + "/catalogue"
+      xslt1 = resp.data
+      $scope.xslt = xslt1.replace(/%SCHEMA_NAME%/g,catURL)
 
     $scope.download = (name, text, mimeType = 'text/xml;charset=utf-8') ->
       FileSaver.saveAs(new Blob([text], type: mimeType), name)

@@ -50,7 +50,7 @@ angular.module('mc.core.ui.bs.catalogue', ['mc.core.catalogue']).config ['catalo
   catalogueProvider.setDefaultSort 'catalogueElement',  sort: 'name',         order: 'asc'
   catalogueProvider.setDefaultSort 'asset',             sort: 'lastUpdated',  order: 'desc'
 
-  catalogueProvider.setDefaultXslt 'catalogueElement',  '/assets/xsl/transform2CatalogueSchema.xsl'
+  catalogueProvider.setDefaultXslt 'catalogueElement',  '/assets/xsl/TMP_transform2CatalogueSchema.xsl'
 
   # TODO: deprecation warning for primitive and reference data type
   catalogueProvider.setDeprecationWarning 'dataElement', (dataElement) ->

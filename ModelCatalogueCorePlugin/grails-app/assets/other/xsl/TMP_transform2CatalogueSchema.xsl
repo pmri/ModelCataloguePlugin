@@ -12,8 +12,8 @@
     <xsl:template match="/">
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning'
-                   xmlns=%SCHEMA_NAME%
-                   targetNamespace=%SCHEMA_NAME%
+                   xmlns='%SCHEMA_NAME%'
+                   targetNamespace='%SCHEMA_NAME%'
                    vc:minVersion='1.1' elementFormDefault='qualified'>
             <!-- Convert all MC dataType entities to simpleTypes -->
             <xsl:apply-templates select="//mc:dataType"/>
@@ -35,7 +35,7 @@
         <!-- complexType 1 -->
         <xs:complexType >
             <!--Build up a complex type named using the (mcxml) name with the mcid added on: eg "name-id" -->
-            <xsl:attribute name="name"><xsl:value-of select='translate(replace(replace(@id, "^http://localhost:\d*\D*/catalogue/dataClass/(\d*)$", "placeholder-$1.2"),"placeholder",@name )," ","-")'/></xsl:attribute>
+            <xsl:attribute name="name"><xsl:value-of select='translate(replace(replace(@id, "^%SCHEMA_NAME%/dataClass/(\d*)$", "placeholder-$1.2"),"placeholder",@name )," ","-")'/></xsl:attribute>
             <xs:sequence>
                 <xsl:for-each select="child::mc:dataElement">
                     <!--xsl:variable name="dtName" select="mc:dataType/@name"/-->
