@@ -1,9 +1,13 @@
 package org.modelcatalogue.core.util.builder
 
 import grails.util.GrailsNameUtils
+import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j
+import org.hibernate.SessionFactory
+import org.hibernate.StatelessSession
+import org.hibernate.Transaction
 import org.modelcatalogue.builder.api.BuilderKeyword
 import org.modelcatalogue.builder.api.DataModelPolicyBuilder
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
@@ -102,7 +106,17 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
         DefaultCatalogueBuilder self = this
         self.with c
 
-        created = repository.resolveAllProxies(skipDrafts)
+        StatelessSession session = Holders.applicationContext.getBean(SessionFactory).openStatelessSession()
+
+        try {
+            Transaction transaction = session.beginTransaction()
+            created = repository.resolveAllProxies(skipDrafts)
+            transaction.commit()
+        } finally {
+            session.close()
+        }
+
+
 
         // we don't want to keep any references in this point
         context.clear()

@@ -210,6 +210,9 @@ class CatalogueElementProxyRepository {
                     FriendlyErrors.failFriendlySave(dataModel)
                 }
                 logDebug "${'-' * (elNumberOfPositions * 2 + 3)} Resolved as $resolved"
+                if (i % 100 == 0) {
+                    PerformanceUtilService.cleanupPropertyMap()
+                }
             } catch (e) {
                 if (anyCause(e, ReferenceNotPresentInTheCatalogueException)) {
                     logWarn "Reference ${element} not present in the catalogue"
@@ -233,6 +236,9 @@ class CatalogueElementProxyRepository {
                     return
                 }
                 resolvedRelationships << relationshipProxy.resolve(this)?.getId()
+                if (i % 100 == 0) {
+                    PerformanceUtilService.cleanupPropertyMap()
+                }
             } catch (e) {
                 if (anyCause(e,ReferenceNotPresentInTheCatalogueException)) {
                     logWarn "Some item referred by ${relationshipProxy} not present in the catalogue"

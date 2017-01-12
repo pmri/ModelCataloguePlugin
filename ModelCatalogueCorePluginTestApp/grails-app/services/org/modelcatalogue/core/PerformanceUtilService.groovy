@@ -16,4 +16,8 @@ class PerformanceUtilService {
         session.clear()
         propertyInstanceMap.get().clear()
     }
+
+    static void cleanupPropertyMap() {
+        DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.get().clear()
+    }
 }
