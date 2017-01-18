@@ -10,6 +10,7 @@ import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.publishing.PublishingContext
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.FriendlyErrors
+import org.modelcatalogue.core.util.HibernateHelper
 import org.springframework.util.StopWatch
 
 @Log4j @GrailsCompileStatic
@@ -97,9 +98,9 @@ class CatalogueElementProxyRepository {
         return equals(a.classification, b.classification) && a.name == b.name
     }
 
-    public Set<CatalogueElement> resolveAllProxies(boolean skipDirtyChecking) {
+    public Set<DataModel> resolveAllProxies(boolean skipDirtyChecking) {
         StopWatch watch =  new StopWatch('catalogue proxy repository')
-        Set<CatalogueElement> created = []
+        Set<DataModel> created = []
 
         List<CatalogueElement> lastElement = CatalogueElement.list(max: 1, sort: 'id', order: 'desc')
         maxCatalogueElementIdAtStart = lastElement ? lastElement.first().getId() : Long.MAX_VALUE
@@ -208,7 +209,11 @@ class CatalogueElementProxyRepository {
             logDebug "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving $element"
             try {
                 CatalogueElement resolved = element.resolve() as CatalogueElement
-                created.add(resolved)
+                if (HibernateHelper.getEntityClass(resolved) == DataModel) {
+                    created.add(resolved as DataModel)
+                } else {
+                    created.add(resolved.dataModel)
+                }
                 relationshipProxiesToBeResolved.addAll element.pendingRelationships
                 if (element.pendingPolicies) {
                     DataModel dataModel = resolved as DataModel

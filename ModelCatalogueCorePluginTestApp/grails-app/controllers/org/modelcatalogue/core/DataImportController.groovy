@@ -81,7 +81,7 @@ class DataImportController  {
                 try {
                     ExcelLoader parser = new ExcelLoader(builder)
                     parser.importData(headersMap, inputStream)
-                    finalizeAsset(id, (DataModel) (builder.created.find {it.instanceOf(DataModel)} ?: builder.created.find{it.dataModel}?.dataModel), userId)
+                    finalizeAsset(id, builder.created?.first(), userId)
                 } catch (Exception e) {
                     logError(id, e)
                 }
@@ -99,7 +99,7 @@ class DataImportController  {
                 try {
                     CatalogueXmlLoader loader = new CatalogueXmlLoader(builder)
                     loader.load(inputStream)
-                    finalizeAsset(id, (DataModel) (builder.created.find {it.instanceOf(DataModel)} ?: builder.created.find{it.dataModel}?.dataModel), userId)
+                    finalizeAsset(id, builder.created?.first(), userId)
                 } catch (Exception e) {
                     logError(id, e)
                 }
@@ -118,7 +118,7 @@ class DataImportController  {
                 try {
                     OboLoader loader = new OboLoader(builder)
                     loader.load(inputStream, name, idpattern)
-                    finalizeAsset(id, (DataModel) (builder.created.find {it.instanceOf(DataModel)} ?: builder.created.find{it.dataModel}?.dataModel), userId)
+                    finalizeAsset(id, builder.created?.first(), userId)
                 } catch (Exception e) {
                     logError(id, e)
                 }
@@ -136,8 +136,8 @@ class DataImportController  {
 
             executeInBackground(id, "Imported from LOINC")  {
                 try {
-                    Set<CatalogueElement> created = loincImportService.serviceMethod(inputStream)
-                    finalizeAsset(id, (DataModel) (created.find {it.instanceOf(DataModel)} ?: created.find{it.dataModel}?.dataModel), userId)
+                    Set<DataModel> created = loincImportService.serviceMethod(inputStream)
+                    finalizeAsset(id, created?.first(), userId)
                 } catch (Exception e) {
                     logError(id, e)
                 }
@@ -155,8 +155,8 @@ class DataImportController  {
 
             executeInBackground(id, "Imported from Model Catalogue DSL")  {
                 try {
-                    Set<CatalogueElement> created = initCatalogueService.importMCFile(inputStream, false, builder)
-                    finalizeAsset(id, (DataModel) (created.find {it.instanceOf(DataModel)} ?: created.find{it.dataModel}?.dataModel), userId)
+                    Set<DataModel> created = initCatalogueService.importMCFile(inputStream, false, builder)
+                    finalizeAsset(id, created?.first(), userId)
                 } catch (Exception e) {
                     logError(id, e)
                 }

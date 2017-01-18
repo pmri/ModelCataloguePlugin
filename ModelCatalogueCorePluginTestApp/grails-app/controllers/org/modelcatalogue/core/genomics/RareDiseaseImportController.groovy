@@ -57,9 +57,9 @@ class RareDiseaseImportController {
             def testDataModel = elementService.findByModelCatalogueId(DataModel, params.testDataModelId)
             executeInBackground(asset.id, "Imported from Rare Disease Csv") {
                 try {
-                    def created = rareDiseaseImportService.importDisorderedCsv(builder, dataModel, hpoDataModel,
+                    Set<DataModel> created = rareDiseaseImportService.importDisorderedCsv(builder, dataModel, hpoDataModel,
                         testDataModel, file.inputStream)
-                    finalizeAsset(asset.id, (DataModel) (created.find {it.instanceOf(DataModel)} ?: created.find{it.dataModel}?.dataModel),
+                    finalizeAsset(asset.id,created?.first(),
                         modelCatalogueSecurityService.currentUser?.id)
                 } catch (Exception e) {
                     logError(asset.id, e)

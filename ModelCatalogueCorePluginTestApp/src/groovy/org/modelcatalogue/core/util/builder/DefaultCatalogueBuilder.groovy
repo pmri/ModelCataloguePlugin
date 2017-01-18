@@ -59,7 +59,7 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
      * The elements don't have to be created by that call but it should be resolved by any of the element creation
      * method such as <code>CatalogueBuilder#model(java.util.Map, groovy.lang.Closure)</code>.
      */
-    Set<CatalogueElement> created = []
+    Set<DataModel> created = []
 
     /**
      * Set of types to be created automatically.

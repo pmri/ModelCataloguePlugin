@@ -110,10 +110,9 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
         return true
     }
 
-    private <E extends CatalogueElement> E build(@DelegatesTo(CatalogueBuilder) Closure cl) {
+    void build(@DelegatesTo(CatalogueBuilder) Closure cl) {
         DefaultCatalogueBuilder defaultCatalogueBuilder = new DefaultCatalogueBuilder(dataModelService, elementService)
         defaultCatalogueBuilder.build cl
-        defaultCatalogueBuilder.created.first() as E
     }
 
     private DataType getPressure() {

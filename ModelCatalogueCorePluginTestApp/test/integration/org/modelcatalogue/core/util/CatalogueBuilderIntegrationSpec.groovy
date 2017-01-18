@@ -29,7 +29,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
     def dataModelService
     def elementService
 
-    Set<CatalogueElement> created = []
+    @Deprecated Set<DataModel> created = []
 
     def setup() {
         loadMarshallers()
@@ -63,7 +63,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         }
 
         expect:
-        created.first().latestVersionId == c.refresh().latestVersionId
+            DataModel.findByName('ExistingSchema').latestVersionId == c.refresh().latestVersionId
     }
 
     def "reuse existing classification by id"() {
@@ -164,7 +164,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         }
 
         expect:
-        created.first().latestVersionId == unit.refresh().latestVersionId
+        MeasurementUnit.findByName('ExistingUnit').latestVersionId == unit.refresh().latestVersionId
     }
 
     def "creates only one measurement unit as measurement unit name is unique"() {
@@ -229,7 +229,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         }
 
         expect:
-        created.first().latestVersionId == unit.refresh().latestVersionId
+        DataElement.findByName('ExistingElement').first().latestVersionId == unit.refresh().latestVersionId
     }
 
     def "complain if data element name is missing"() {
@@ -269,7 +269,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         }
 
         expect:
-        created.first().latestVersionId == unit.refresh().latestVersionId
+        DataClass.findByName('ExistingModel').latestVersionId == unit.refresh().latestVersionId
     }
 
     def "complain if model name is missing"() {
@@ -591,9 +591,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
             }
         }
 
-        created.each {
-            assert it.publish(elementService, ProgressMonitor.NOOP).errors.errorCount == 0
-        }
+        DataModel.findByName("NewVersion1").publish(elementService, ProgressMonitor.NOOP).errors.errorCount == 0
 
         build {
             dataModel(name: "NewVersion2") {
@@ -731,7 +729,6 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
     private void build(@DelegatesTo(CatalogueBuilder) Closure cl) {
         DefaultCatalogueBuilder defaultCatalogueBuilder = new DefaultCatalogueBuilder(dataModelService, elementService)
         defaultCatalogueBuilder.build cl
-        created = defaultCatalogueBuilder.created
     }
 
 
@@ -887,7 +884,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
             }
         }
 
-        DataClass parent = created.find { it.name == name }
+        DataClass parent = DataClass.findByName(name)
 
         then:
         parent
@@ -919,7 +916,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
                 }
             }
         }
-        DataClass parent = created.find { it.name == name } as DataClass
+        DataClass parent = DataClass.findByName(name)
 
         then:
         parent

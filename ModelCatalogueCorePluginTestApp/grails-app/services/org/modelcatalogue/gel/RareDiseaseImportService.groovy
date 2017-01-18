@@ -18,7 +18,7 @@ class RareDiseaseImportService {
     LinkGenerator grailsLinkGenerator
     ElementService elementService
 
-    Set<CatalogueElement> importDisorderedCsv(CatalogueBuilder catalogueBuilder, DataModel dataModelToImport,
+    Set<DataModel> importDisorderedCsv(CatalogueBuilder catalogueBuilder, DataModel dataModelToImport,
                                               DataModel hpoDataModel, DataModel testDataModel, InputStream inputStream) {
         Preconditions.checkNotNull(dataModelToImport)
         Preconditions.checkNotNull(hpoDataModel)

@@ -54,7 +54,7 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
 
     def "there must be a top level model representing a form and at least one model representing the section"(){
         given:
-        DataClass formModel = build {
+        build {
             dataClass(name: TEST_FORM_NAME) {
                 ext ModelToFormExporterService.EXT_FORM_REVISION_NOTES, TEST_FORM_REVISION_NOTES
                 ext ModelToFormExporterService.EXT_FORM_VERSION_DESCRIPTION, TEST_FORM_VERSION_DESCRIPTION
@@ -65,6 +65,8 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+
+        DataClass formModel = DataClass.findByName(TEST_FORM_NAME)
 
         when:
         CaseReportForm form = modelToFormExporterService.convert(formModel)
@@ -87,7 +89,7 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
 
     def "nested models represent sections"(){
         given:
-        DataClass formModel = build {
+        build {
             dataClass(name: TEST_FORM_NAME) {
                 ext ModelToFormExporterService.EXT_FORM_REVISION_NOTES, TEST_FORM_REVISION_NOTES
                 ext ModelToFormExporterService.EXT_FORM_VERSION_DESCRIPTION, TEST_FORM_VERSION_DESCRIPTION
@@ -104,6 +106,8 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
                 dataClass(name: TEST_SECTION_NAME_3)
             }
         }
+
+        DataClass formModel = DataClass.findByName(TEST_FORM_NAME)
 
         when:
         CaseReportForm form = modelToFormExporterService.convert(formModel)
@@ -124,7 +128,7 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
 
     def "grids are signaled with flag"(){
         given:
-        DataClass formModel = build {
+        build {
             dataClass(name: TEST_FORM_NAME) {
                 ext ModelToFormExporterService.EXT_FORM_REVISION_NOTES, TEST_FORM_REVISION_NOTES
                 ext ModelToFormExporterService.EXT_FORM_VERSION_DESCRIPTION, TEST_FORM_VERSION_DESCRIPTION
@@ -143,6 +147,8 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+
+        DataClass formModel = DataClass.findByName(TEST_FORM_NAME)
 
         when:
         CaseReportForm form = modelToFormExporterService.convert(formModel)
@@ -164,7 +170,7 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
     @Requires({ !System.getenv('TRAVIS') })
     def "various item types"(){
         given:
-        DataClass formModel = build {
+        build {
             dataClass(name: TEST_FORM_NAME) {
                 ext ModelToFormExporterService.EXT_FORM_REVISION_NOTES, TEST_FORM_REVISION_NOTES
                 ext ModelToFormExporterService.EXT_FORM_VERSION_DESCRIPTION, TEST_FORM_VERSION_DESCRIPTION
@@ -220,6 +226,8 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+
+        DataClass formModel = DataClass.findByName(TEST_FORM_NAME)
 
         when:
         CaseReportForm form = modelToFormExporterService.convert(formModel)
@@ -277,9 +285,8 @@ class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
 
     // TODO: more tests
 
-    DataClass build(@DelegatesTo(CatalogueBuilder) Closure builder) {
+    void build(@DelegatesTo(CatalogueBuilder) Closure builder) {
         catalogueBuilder.build(builder)
-        catalogueBuilder.created.find{ it.instanceOf(DataClass) } as DataClass
 
     }
 

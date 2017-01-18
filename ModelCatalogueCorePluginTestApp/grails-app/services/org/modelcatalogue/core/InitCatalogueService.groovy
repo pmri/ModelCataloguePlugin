@@ -103,8 +103,8 @@ class InitCatalogueService {
     private void readMCFile(Resource resource, boolean failOnError) {
         try {
             log.info "Importing MC file ${resource.URI}"
-            Set<CatalogueElement> lastCreated = importMCFile(resource.inputStream, true)
-            for (CatalogueElement element in lastCreated) {
+            Set<DataModel> lastCreated = importMCFile(resource.inputStream, true)
+            for (DataModel element in lastCreated) {
                 if (element.status == ElementStatus.DRAFT) {
                     elementService.finalizeElement(element)
                 }
@@ -176,7 +176,7 @@ class InitCatalogueService {
         }
     }
 
-    Set<CatalogueElement> importMCFile(InputStream inputStream, boolean skipDraft = false, DefaultCatalogueBuilder builder = new DefaultCatalogueBuilder(dataModelService, elementService)) {
+    Set<DataModel> importMCFile(InputStream inputStream, boolean skipDraft = false, DefaultCatalogueBuilder builder = new DefaultCatalogueBuilder(dataModelService, elementService)) {
         if (skipDraft) {
             builder.skip ElementStatus.DRAFT
         }
