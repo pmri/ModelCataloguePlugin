@@ -119,6 +119,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
         build {
             dataType(name: 'Pressure', id: "http://www.example.com/domains/Pressure")
         }
+        DataType.findByNameAndDataModelIsNull('Pressure')
     }
 
     private DataModel getTransportation() {
@@ -150,6 +151,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
             }
 
         }
+        DataModel.findByName('Transportation')
     }
 
     private DataClass getLocomotive() {
@@ -188,6 +190,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+        DataClass.findByNameAndDataModelIsNull('Locomotive')
     }
 
     private DataElement getAdhesion() {
@@ -206,6 +209,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+        DataElement.findByNameAndDataModelIsNull('Factor of Adhesion')
     }
 
     private DataType getForce() {
@@ -227,7 +231,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 }
             }
         }
-
+        DataType.findByNameAndDataModelIsNull('Force')
     }
 
     private MeasurementUnit getNewton() {
@@ -238,6 +242,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 rel 'relatedTo' to 'SI', 'kilogram'
             }
         }
+        MeasurementUnit.findByNameAndDataModelIsNull('Newton')
     }
 
     private DataType getInteger() {
@@ -249,6 +254,8 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 description "A number with no fractional part."
             }
         }
+
+        DataType.findByNameAndDataModelIsNull('Integer')
     }
 
     private DataType getGender() {
@@ -257,6 +264,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 description "The state of being male or female (typically used with reference to social and cultural differences rather than biological ones)"
             }
         }
+        DataType.findByNameAndDataModelIsNull('Gender')
     }
 
     private DataType getUser() {
@@ -268,12 +276,14 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
                 }
             }
         }
+        DataType.findByNameAndDataModelIsNull('User')
     }
 
     private DataType getDecimal() {
         build {
             dataType(name: "Decimal", id: "http://www.example.com/types/Decimal")
         }
+        DataType.findByNameAndDataModelIsNull('Decimal')
     }
 
 }
