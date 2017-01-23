@@ -211,7 +211,7 @@ class CatalogueElementProxyRepository {
                 CatalogueElement resolved = element.resolve() as CatalogueElement
                 if (HibernateHelper.getEntityClass(resolved) == DataModel) {
                     created.add(resolved as DataModel)
-                } else {
+                } else if (resolved.dataModel){
                     created.add(resolved.dataModel)
                 }
                 relationshipProxiesToBeResolved.addAll element.pendingRelationships
