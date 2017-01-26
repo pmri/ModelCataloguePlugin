@@ -3,11 +3,13 @@ package org.modelcatalogue.core.util.builder
 import com.google.common.collect.Maps
 import com.google.common.collect.Sets
 import grails.compiler.GrailsCompileStatic
+import groovy.transform.CompileDynamic
 import groovy.util.logging.Log4j
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.Legacy
 
+import java.lang.ref.WeakReference
 import java.lang.reflect.Modifier
 
 import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
@@ -41,7 +43,8 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
     final Set<String> policies = []
 
     private CatalogueElementProxy<T> replacedBy
-    private T resolved
+    private WeakReference<T> resolved = new WeakReference<T>(null)
+    private Long resolvedId = 0
     private String changed
 
     DefaultCatalogueElementProxy(CatalogueElementProxyRepository repository, Class<T> domain, String id, CatalogueElementProxy<DataModel> classification, String name, boolean underControl) {
@@ -81,14 +84,20 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
                 return replacedBy.resolve()
             }
 
-            if(resolved) {
-                return resolved
+            T element = resolved.get()
+
+            if(element) {
+                return element
             }
 
-            resolved = fill(findExisting())
+            if (resolvedId) {
+                return loadResolvedById()
+            }
 
-            if (resolved) {
-                return resolved
+            element = fill(findExisting())
+
+            if (element) {
+                return element
             }
 
             try {
@@ -99,17 +108,26 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
                 log.debug "$this not found, creating new one"
 
                 newlyCreated = true
-                resolved = fill(domain.newInstance() as T)
+                element = fill(domain.newInstance() as T)
             } catch (InstantiationException ignored) {
                 throw new ReferenceNotPresentInTheCatalogueException("Cannot create element from reference $this")
             }
 
+            resolved = new WeakReference<T>(element)
+            resolvedId = element.id
 
-            return resolved
+            return element
         } catch (Exception e) {
             throw new RuntimeException("Failed to resolve $this:\n\n$e", e)
         }
 
+    }
+
+    @CompileDynamic
+    private T loadResolvedById() {
+        T element = domain.get(resolvedId) as T
+        resolved = new WeakReference<T>(element)
+        return element
     }
 
     @Override
@@ -122,7 +140,7 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
         if (!value) {
             value = null
         }
-        if (resolved) {
+        if (resolvedId) {
             throw new IllegalStateException("This catalogue element is already resolved!")
         }
 
@@ -151,7 +169,7 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 
     @Override
     void setExtension(String key, String value) {
-        if (resolved) {
+        if (resolvedId) {
             throw new IllegalStateException("This catalogue element is already resolved!")
         }
         extensions.put(key, value)
